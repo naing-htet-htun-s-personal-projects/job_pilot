@@ -16,7 +16,13 @@ export function Hero({ isAuthenticated = false }: { isAuthenticated?: boolean })
             ? "🌍 နိုင်ငံခြားအလုပ်အကိုင်နှင့် Remote အလုပ်များ ရှာဖွေရန် AI Copilot"
             : "🌍 AI Copilot for International & Remote Job Search"}
         </span>
-        <h1 className="mx-auto max-w-180 text-[clamp(2.25rem,5.5vw,4.2rem)] leading-[1.06] font-semibold tracking-[-0.04em] text-text-slate">
+        <h1
+          className={`mx-auto max-w-180 font-semibold text-text-slate ${
+            isMy
+              ? "text-[clamp(1.7rem,3.5vw,2.65rem)] leading-[1.38] tracking-normal"
+              : "text-[clamp(2.25rem,5.5vw,4.2rem)] leading-[1.06] tracking-[-0.04em]"
+          }`}
+        >
           {isMy ? (
             <>
               နိုင်ငံခြားအလုပ်ရှာဖွေခြင်းကို

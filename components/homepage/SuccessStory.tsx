@@ -12,7 +12,13 @@ export function SuccessStory() {
       <p className="text-xs font-semibold tracking-[0.22em] text-accent uppercase">
         {isMy ? "အသုံးပြုသူ အတွေ့အကြုံ" : "Success Stories"}
       </p>
-      <blockquote className="mx-auto mt-7 max-w-190 text-[clamp(1.4rem,2.8vw,2.2rem)] leading-[1.3] font-medium tracking-[-0.03em] text-text-slate-medium">
+      <blockquote
+        className={`mx-auto mt-7 max-w-190 font-medium text-text-slate-medium ${
+          isMy
+            ? "text-[clamp(1.15rem,2vw,1.55rem)] leading-[1.6] tracking-normal"
+            : "text-[clamp(1.4rem,2.8vw,2.2rem)] leading-[1.3] tracking-[-0.03em]"
+        }`}
+      >
         {isMy
           ? "“အရင်က ညနေတိုင်း Resume ပြင်လိုက် အလုပ်လျှောက်လိုက်နဲ့ အချိန်ကုန်နေခဲ့တာ။ အခုတော့ JobPilot က ကိုယ်နဲ့ကိုက်တဲ့ နိုင်ငံခြားအလုပ်တွေနဲ့ ကုမ္ပဏီအချက်အလက်တွေပါ စုပေးလို့ အင်တာဗျူးတွေ တန်းစီဝင်လာတယ်။”"
           : "“I used to spend my evenings copy-pasting resumes. Now I open my dashboard to see high-match international roles and research waiting. Had 3 offers on the table simultaneously.”"}

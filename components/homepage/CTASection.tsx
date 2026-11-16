@@ -9,7 +9,13 @@ export function CTASection({ isAuthenticated = false }: { isAuthenticated?: bool
 
   return (
     <section className="landing-hero-glow border-b border-border px-6 py-20 text-center sm:px-10 lg:py-24">
-      <h2 className="mx-auto max-w-190 text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.08] font-semibold tracking-[-0.04em] text-text-slate">
+      <h2
+        className={`mx-auto max-w-190 font-semibold text-text-slate ${
+          isMy
+            ? "text-[clamp(1.55rem,3vw,2.35rem)] leading-[1.38] tracking-normal"
+            : "text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.08] tracking-[-0.04em]"
+        }`}
+      >
         {isMy ? (
           <>
             နိုင်ငံတကာ အလုပ်အကိုင်ရှာဖွေမှုကို

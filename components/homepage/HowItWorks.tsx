@@ -54,7 +54,13 @@ export function HowItWorks() {
     <section className="landing-grid border-b border-border">
       <div className="border-b border-border lg:border-r lg:border-b-0">
         <div className="px-8 py-14 sm:px-14 lg:py-16">
-          <h2 className="max-w-95 text-[clamp(1.85rem,3.6vw,3rem)] leading-[1.12] font-semibold tracking-[-0.04em] text-text-slate">
+          <h2
+            className={`max-w-95 font-semibold text-text-slate ${
+              isMy
+                ? "text-[clamp(1.45rem,2.5vw,2rem)] leading-[1.38] tracking-normal"
+                : "text-[clamp(1.85rem,3.6vw,3rem)] leading-[1.12] tracking-[-0.04em]"
+            }`}
+          >
             {isMy
               ? "နိုင်ငံတကာ အလုပ်ရှာဖွေမှုကို လွယ်ကူစွာ စီမံပါ"
               : "Manage Your Global Job Search With Ease"}
