@@ -19,8 +19,8 @@ export async function GET(req: NextRequest) {
       Math.max(1, Number.parseInt(searchParams.get("pageSize") ?? "20", 10) || 20)
     )
     const search = (searchParams.get("search") ?? "").trim()
-    const match = (searchParams.get("match") ?? "all") as JobMatchFilter
-    const sort = (searchParams.get("sort") ?? "match_score") as JobSortBy
+    const match = (searchParams.get("match") ?? searchParams.get("matchFilter") ?? "all") as JobMatchFilter
+    const sort = (searchParams.get("sort") ?? searchParams.get("sortOption") ?? "match_score") as JobSortBy
 
     let query = insforge.database
       .from("jobs")
@@ -63,9 +63,10 @@ export async function GET(req: NextRequest) {
     const total = count ?? (data?.length ?? 0)
     const totalPages = Math.max(1, Math.ceil(total / pageSize))
 
-    const response: JobsListResponse = {
+    const response: JobsListResponse & { totalCount: number } = {
       jobs: (data ?? []) as Job[],
       total,
+      totalCount: total,
       page,
       pageSize,
       totalPages,
