@@ -1,8 +1,20 @@
+import { redirect } from "next/navigation"
 import { initiateOAuth } from "@/actions/auth"
+import { createInsforgeServer } from "@/lib/insforge-server"
 
 export default async function LoginPage(props: {
   searchParams: Promise<{ error?: string }>
 }) {
+  try {
+    const insforge = await createInsforgeServer()
+    const { data } = await insforge.auth.getCurrentUser()
+    if (data?.user) {
+      redirect("/dashboard")
+    }
+  } catch {
+    // Allow login page to render if session check fails
+  }
+
   const { error } = await props.searchParams
 
   return (
