@@ -1,4 +1,7 @@
+"use client"
+
 import { Briefcase, Calendar, DollarSign, MapPin } from "lucide-react"
+import { useLanguage } from "@/components/LanguageProvider"
 import type { Job } from "@/types/job"
 
 interface JobInfoProps {
@@ -26,27 +29,28 @@ function formatFoundDate(dateString: string): string {
 }
 
 export function JobInfo({ job }: JobInfoProps) {
+  const { t } = useLanguage()
   const items = [
     {
-      label: "Salary Est.",
+      label: t("jobDetails.salary"),
       value: job.salary || "—",
       icon: DollarSign,
       iconBg: "bg-success-lightest text-success-dark",
     },
     {
-      label: "Location",
+      label: t("jobDetails.location"),
       value: job.location || "—",
       icon: MapPin,
       iconBg: "bg-info-lightest text-info-foreground",
     },
     {
-      label: "Job Type",
+      label: t("jobDetails.jobType"),
       value: job.job_type || "—",
       icon: Briefcase,
       iconBg: "bg-accent-light text-accent",
     },
     {
-      label: "Date Found",
+      label: t("jobDetails.dateFound"),
       value: formatFoundDate(job.found_at),
       icon: Calendar,
       iconBg: "bg-surface-tertiary text-text-secondary",

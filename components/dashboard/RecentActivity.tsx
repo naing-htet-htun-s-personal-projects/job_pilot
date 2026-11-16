@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Activity, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 import type { ActivityItem } from "./types";
 
 interface RecentActivityProps {
@@ -38,10 +41,12 @@ function getDotClasses(tone: ActivityItem["tone"]): string {
 }
 
 export function RecentActivity({ items }: RecentActivityProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col rounded-xl border border-border bg-surface shadow-card">
       <div className="border-b border-border px-6 py-4">
-        <h2 className="text-base font-semibold text-text-primary">Recent Activity</h2>
+        <h2 className="text-base font-semibold text-text-primary">{t("dashboard.recentActivity")}</h2>
       </div>
 
       {items.length === 0 ? (
@@ -49,15 +54,12 @@ export function RecentActivity({ items }: RecentActivityProps) {
           <div className="flex size-10 items-center justify-center rounded-full bg-surface-secondary text-text-muted">
             <Activity className="size-5" />
           </div>
-          <p className="mt-3 text-sm font-medium text-text-primary">No recent activity yet</p>
-          <p className="mt-1 max-w-xs text-xs text-text-muted">
-            Run a job search or analyze a posting to see your discovery and company research timeline here.
-          </p>
+          <p className="mt-3 text-sm font-medium text-text-primary">{t("dashboard.noActivity")}</p>
           <Link
             href="/find-jobs"
             className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-xs font-medium text-accent-foreground transition-opacity hover:opacity-90"
           >
-            Find Jobs
+            {t("dashboard.goFindJobs")}
             <ArrowRight className="size-3.5" />
           </Link>
         </div>

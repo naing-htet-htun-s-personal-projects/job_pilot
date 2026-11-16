@@ -12,6 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useLanguage } from "@/components/LanguageProvider";
 import type { DailyCountPoint, MatchBucketPoint } from "./types";
 
 interface CompanyResearchChartProps {
@@ -56,17 +57,18 @@ const tooltipContentStyle = {
 };
 
 export function CompanyResearchChart({ data }: CompanyResearchChartProps) {
+  const { t } = useLanguage();
   const hasData = data.some((d) => d.count > 0);
 
   return (
     <div className="flex flex-col rounded-xl border border-border bg-surface p-6 shadow-card">
-      <h2 className="text-base font-semibold text-text-primary">Company Research Activity</h2>
+      <h2 className="text-base font-semibold text-text-primary">{t("dashboard.charts.research")}</h2>
 
       {!hasData ? (
         <ChartEmptyState
           icon={BarChart3}
-          title="No company research yet"
-          description="Research data will appear here once jobs with company insights are saved."
+          title={t("dashboard.charts.noData")}
+          description={t("dashboard.noActivity")}
         />
       ) : (
         <div className="mt-4 h-64 w-full">
@@ -106,17 +108,18 @@ export function CompanyResearchChart({ data }: CompanyResearchChartProps) {
 }
 
 export function JobsOverTimeChart({ data }: JobsOverTimeChartProps) {
+  const { t } = useLanguage();
   const hasData = data.some((d) => d.count > 0);
 
   return (
     <div className="flex flex-col rounded-xl border border-border bg-surface p-6 shadow-card">
-      <h2 className="text-base font-semibold text-text-primary">Jobs Found Over Time</h2>
+      <h2 className="text-base font-semibold text-text-primary">{t("dashboard.charts.overTime")}</h2>
 
       {!hasData ? (
         <ChartEmptyState
           icon={TrendingUp}
-          title="No job trend data yet"
-          description="Your daily job discovery trend for the week will appear here."
+          title={t("dashboard.charts.noData")}
+          description={t("dashboard.noActivity")}
         />
       ) : (
         <div className="mt-4 h-64 w-full">
@@ -162,17 +165,18 @@ export function JobsOverTimeChart({ data }: JobsOverTimeChartProps) {
 }
 
 export function MatchDistributionChart({ data }: MatchDistributionChartProps) {
+  const { t } = useLanguage();
   const hasData = data.some((d) => d.count > 0);
 
   return (
     <div className="flex flex-col rounded-xl border border-border bg-surface p-6 shadow-card">
-      <h2 className="text-base font-semibold text-text-primary">Match Score Distribution</h2>
+      <h2 className="text-base font-semibold text-text-primary">{t("dashboard.charts.matchDist")}</h2>
 
       {!hasData ? (
         <ChartEmptyState
           icon={BarChart3}
-          title="No match scores yet"
-          description="Match score buckets will populate after jobs are analyzed against your profile."
+          title={t("dashboard.charts.noData")}
+          description={t("dashboard.noActivity")}
         />
       ) : (
         <div className="mt-4 h-64 w-full">

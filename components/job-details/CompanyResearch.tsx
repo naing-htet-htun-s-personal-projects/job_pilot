@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Building2, ExternalLink, Loader2, Search } from "lucide-react"
+import { useLanguage } from "@/components/LanguageProvider"
 import type { CompanyResearchDossier, Job } from "@/types/job"
 
 interface CompanyResearchProps {
@@ -11,6 +12,7 @@ interface CompanyResearchProps {
 
 export function CompanyResearch({ job }: CompanyResearchProps) {
   const router = useRouter()
+  const { t } = useLanguage()
   const [dossier, setDossier] = useState<CompanyResearchDossier | null>(
     job.company_research
   )
@@ -65,7 +67,7 @@ export function CompanyResearch({ job }: CompanyResearchProps) {
             <Building2 className="size-4" />
           </div>
           <h2 className="text-base font-semibold text-text-primary">
-            Company Research
+            {t("jobDetails.researchTitle")}
           </h2>
         </div>
 
@@ -78,12 +80,12 @@ export function CompanyResearch({ job }: CompanyResearchProps) {
           {isLoading ? (
             <>
               <Loader2 className="size-4 animate-spin" />
-              <span>Researching...</span>
+              <span>{t("jobDetails.researchingBtn")}</span>
             </>
           ) : (
             <>
               <Search className="size-4" />
-              <span>{dossier ? "Refresh Research" : "Research Company"}</span>
+              <span>{t("jobDetails.researchBtn")}</span>
             </>
           )}
         </button>

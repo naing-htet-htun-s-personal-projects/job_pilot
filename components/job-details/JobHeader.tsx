@@ -1,4 +1,7 @@
+"use client"
+
 import { Building2, ExternalLink } from "lucide-react"
+import { useLanguage } from "@/components/LanguageProvider"
 import type { Job } from "@/types/job"
 
 interface JobHeaderProps {
@@ -12,6 +15,7 @@ function getMatchPillClass(score: number): string {
 }
 
 export function JobHeader({ job }: JobHeaderProps) {
+  const { t } = useLanguage()
   const postUrl = job.source_url || job.external_apply_url
 
   return (
@@ -51,7 +55,7 @@ export function JobHeader({ job }: JobHeaderProps) {
           className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-text-primary transition-colors hover:bg-surface-secondary"
         >
           <ExternalLink className="size-4 text-text-secondary" />
-          <span>View Job Post</span>
+          <span>{t("jobDetails.viewPost")}</span>
         </a>
       )}
     </div>

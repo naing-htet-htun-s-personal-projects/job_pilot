@@ -1,3 +1,6 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
 import type { DashboardStats } from "./types";
 
 interface StatsBarProps {
@@ -14,13 +17,14 @@ function formatDelta(delta: number | null): { label: string; isPositive: boolean
 }
 
 export function StatsBar({ stats }: StatsBarProps) {
+  const { t } = useLanguage();
   const jobsDelta = formatDelta(stats.jobsDeltaPercent);
   const matchDelta = formatDelta(stats.matchDeltaPercent);
 
   return (
     <section aria-label="Dashboard statistics" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
-        <p className="text-sm font-medium text-text-secondary">Total Jobs Found</p>
+        <p className="text-sm font-medium text-text-secondary">{t("dashboard.stat.totalJobs")}</p>
         <p className="mt-2 text-3xl font-bold tracking-tight text-text-primary tabular-nums">
           {stats.totalJobs.toLocaleString()}
         </p>
@@ -36,16 +40,16 @@ export function StatsBar({ stats }: StatsBarProps) {
               >
                 {jobsDelta.label}
               </span>
-              <span className="text-text-muted">vs last week</span>
+              <span className="text-text-muted">{t("dashboard.stat.vsLastWeek")}</span>
             </>
           ) : (
-            <span className="text-text-muted">All time total</span>
+            <span className="text-text-muted">{t("dashboard.stat.totalJobs")}</span>
           )}
         </div>
       </div>
 
       <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
-        <p className="text-sm font-medium text-text-secondary">Avg. Match Rate</p>
+        <p className="text-sm font-medium text-text-secondary">{t("dashboard.stat.avgMatch")}</p>
         <p className="mt-2 text-3xl font-bold tracking-tight text-text-primary tabular-nums">
           {stats.avgMatchRate}%
         </p>
@@ -61,28 +65,28 @@ export function StatsBar({ stats }: StatsBarProps) {
               >
                 {matchDelta.label}
               </span>
-              <span className="text-text-muted">vs last week</span>
+              <span className="text-text-muted">{t("dashboard.stat.vsLastWeek")}</span>
             </>
           ) : (
-            <span className="text-text-muted">Across matched jobs</span>
+            <span className="text-text-muted">{t("dashboard.stat.avgMatch")}</span>
           )}
         </div>
       </div>
 
       <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
-        <p className="text-sm font-medium text-text-secondary">Companies Researched</p>
+        <p className="text-sm font-medium text-text-secondary">{t("dashboard.stat.researched")}</p>
         <p className="mt-2 text-3xl font-bold tracking-tight text-text-primary tabular-nums">
           {stats.companiesResearched.toLocaleString()}
         </p>
-        <p className="mt-3 text-xs text-text-muted">Total researched</p>
+        <p className="mt-3 text-xs text-text-muted">{t("dashboard.stat.researched")}</p>
       </div>
 
       <div className="rounded-xl border border-border bg-surface p-5 shadow-card">
-        <p className="text-sm font-medium text-text-secondary">Jobs This Week</p>
+        <p className="text-sm font-medium text-text-secondary">{t("dashboard.stat.thisWeek")}</p>
         <p className="mt-2 text-3xl font-bold tracking-tight text-text-primary tabular-nums">
           {stats.jobsThisWeek.toLocaleString()}
         </p>
-        <p className="mt-3 text-xs text-text-muted">New this week</p>
+        <p className="mt-3 text-xs text-text-muted">{t("dashboard.stat.thisWeek")}</p>
       </div>
     </section>
   );

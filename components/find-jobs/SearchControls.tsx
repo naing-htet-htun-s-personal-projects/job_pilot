@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react"
 import { Loader2, MapPin, Search, Sparkles } from "lucide-react"
+import { useLanguage } from "@/components/LanguageProvider"
 
 interface SearchControlsProps {
   onSearch: (jobTitle: string, location: string) => Promise<void>
@@ -16,6 +17,7 @@ export function SearchControls({
   bannerMessage,
   errorMessage,
 }: SearchControlsProps) {
+  const { t } = useLanguage()
   const [jobTitle, setJobTitle] = useState("")
   const [location, setLocation] = useState("")
 
@@ -36,7 +38,7 @@ export function SearchControls({
             htmlFor="find-job-title"
             className="block text-xs font-medium uppercase tracking-wide text-text-secondary"
           >
-            Job Title
+            {t("findJobs.jobTitleLabel")}
           </label>
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted" />
@@ -45,7 +47,7 @@ export function SearchControls({
               type="text"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
-              placeholder="Frontend Engineer"
+              placeholder={t("findJobs.jobTitlePlaceholder")}
               required
               className="w-full rounded-lg border border-border bg-surface py-2.5 pl-9 pr-3 text-sm text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             />
@@ -57,7 +59,7 @@ export function SearchControls({
             htmlFor="find-job-location"
             className="block text-xs font-medium uppercase tracking-wide text-text-secondary"
           >
-            Location
+            {t("findJobs.locationLabel")}
           </label>
           <div className="relative">
             <MapPin className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted" />
@@ -66,7 +68,7 @@ export function SearchControls({
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Remote, New York..."
+              placeholder={t("findJobs.locationPlaceholder")}
               className="w-full rounded-lg border border-border bg-surface py-2.5 pl-9 pr-3 text-sm text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             />
           </div>
@@ -80,12 +82,12 @@ export function SearchControls({
           {isSearching ? (
             <>
               <Loader2 className="size-4 animate-spin" />
-              <span>Searching...</span>
+              <span>{t("findJobs.searchingBtn")}</span>
             </>
           ) : (
             <>
               <Search className="size-4" />
-              <span>Find Jobs</span>
+              <span>{t("findJobs.searchBtn")}</span>
             </>
           )}
         </button>

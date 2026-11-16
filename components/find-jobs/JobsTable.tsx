@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Briefcase, Building2 } from "lucide-react"
+import { useLanguage } from "@/components/LanguageProvider"
 import type { Job } from "@/types/job"
 
 interface JobsTableProps {
@@ -51,6 +52,7 @@ export function JobsTable({
   onClearFilters,
 }: JobsTableProps) {
   const router = useRouter()
+  const { t } = useLanguage()
 
   if (!isLoading && jobs.length === 0) {
     return (
@@ -59,12 +61,10 @@ export function JobsTable({
           <Briefcase className="size-5" />
         </div>
         <p className="text-sm font-medium text-text-primary">
-          {hasFilters ? "No matching jobs found" : "No jobs found yet"}
+          {hasFilters ? t("findJobs.emptyTitle") : t("findJobs.emptyTitle")}
         </p>
         <p className="mt-1 text-xs text-text-muted">
-          {hasFilters
-            ? "Try adjusting your search query or match filter."
-            : "Search for a role above to discover and score matching jobs."}
+          {t("findJobs.emptyDesc")}
         </p>
         {hasFilters && onClearFilters && (
           <button
@@ -88,11 +88,11 @@ export function JobsTable({
       <table className="w-full min-w-160 border-collapse text-left">
         <thead>
           <tr className="border-b border-border bg-surface-secondary/50 text-xs font-medium uppercase tracking-wider text-text-secondary">
-            <th className="px-6 py-3.5">Company</th>
-            <th className="px-6 py-3.5">Role</th>
-            <th className="px-6 py-3.5">Match Score</th>
-            <th className="px-6 py-3.5">Salary Est.</th>
-            <th className="px-6 py-3.5">Date Found</th>
+            <th className="px-6 py-3.5">{t("findJobs.col.company")}</th>
+            <th className="px-6 py-3.5">{t("findJobs.col.role")}</th>
+            <th className="px-6 py-3.5">{t("findJobs.col.matchScore")}</th>
+            <th className="px-6 py-3.5">{t("findJobs.col.salary")}</th>
+            <th className="px-6 py-3.5">{t("findJobs.col.dateFound")}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-border bg-surface text-sm">

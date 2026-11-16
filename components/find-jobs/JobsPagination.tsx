@@ -1,5 +1,7 @@
 "use client"
 
+import { useLanguage } from "@/components/LanguageProvider"
+
 interface JobsPaginationProps {
   page: number
   pageSize: number
@@ -38,6 +40,7 @@ export function JobsPagination({
   totalCount,
   onPageChange,
 }: JobsPaginationProps) {
+  const { t } = useLanguage()
   if (totalCount === 0) return null
 
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize))
@@ -48,9 +51,7 @@ export function JobsPagination({
   return (
     <div className="flex flex-col items-center justify-between gap-3 border-t border-border bg-surface px-6 py-4 sm:flex-row">
       <p className="text-xs text-text-secondary">
-        Showing <span className="font-medium text-text-primary">{startItem}</span> to{" "}
-        <span className="font-medium text-text-primary">{endItem}</span> of{" "}
-        <span className="font-medium text-text-primary">{totalCount}</span> results
+        {t("findJobs.showing", { from: startItem, to: endItem, total: totalCount })}
       </p>
 
       <div className="flex items-center gap-1.5">
@@ -60,7 +61,7 @@ export function JobsPagination({
           disabled={page <= 1}
           className="rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:bg-surface-secondary hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Previous
+          {t("findJobs.prev")}
         </button>
 
         {pageNumbers.map((item, idx) =>
@@ -90,7 +91,7 @@ export function JobsPagination({
           disabled={page >= totalPages}
           className="rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-primary transition-colors hover:bg-surface-secondary disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Next
+          {t("findJobs.next")}
         </button>
       </div>
     </div>

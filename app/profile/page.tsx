@@ -5,9 +5,10 @@ import { ConnectedAccounts } from "@/components/profile/ConnectedAccounts"
 import { ProfilePageClient } from "@/components/profile/ProfilePageClient"
 import { requireUser, createInsforgeServer } from "@/lib/insforge-server"
 import { calculateCompletion } from "@/lib/profile-utils"
+import { getServerTranslations } from "@/lib/i18n-server"
 
 export default async function ProfilePage() {
-  const { user } = await requireUser()
+  const [{ user }, { t }] = await Promise.all([requireUser(), getServerTranslations()])
   const insforge = await createInsforgeServer()
 
   const { data: profile } = await insforge
@@ -25,9 +26,9 @@ export default async function ProfilePage() {
       <Navbar isAuthenticated />
       <div className="mx-auto max-w-270 px-5 py-8 sm:px-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Profile</h1>
+          <h1 className="text-2xl font-bold">{t("profile.title")}</h1>
           <p className="text-sm text-text-muted">
-            Manage your profile and resume
+            {t("profile.subtitle")}
           </p>
         </div>
         <div className="flex flex-col gap-6">
